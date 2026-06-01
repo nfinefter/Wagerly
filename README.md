@@ -45,28 +45,40 @@ Fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` from **Project Settings
 ### 5. Install & run
 
 ```bash
-pnpm install
-pnpm --filter @wagerly/web dev
+npm install
+npm run dev:web
 ```
 
 Open [http://localhost:3000](http://localhost:3000). Vite loads `.env` from the repo root automatically.
 
 ## Deploy to Vercel
 
-This is a **Vite + React SPA** (not Next.js). Use the Vite preset with the app rooted at `apps/web`.
+This is a **Vite + React SPA** in an npm workspaces monorepo. Deploy from the **repo root**, not `apps/web`.
 
-### Vercel project settings
+### New project (important)
+
+On the Vercel "New Project" screen:
+
+1. **Root Directory** — click **Edit**, then **clear it** (leave blank / repo root). Do **not** use `apps/web`.
+2. **Framework Preset** — choose **Other** (not Vite). The root [`vercel.json`](vercel.json) defines the build.
+3. **Environment Variables** — expand and add before deploying:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+4. Click **Deploy**.
+
+If a deploy is stuck on "Deploying…", cancel it, fix Root Directory to blank, and redeploy.
+
+### Vercel project settings (after creation)
 
 | Setting | Value |
 |---------|--------|
-| **Framework Preset** | Vite |
-| **Root Directory** | `apps/web` |
-| **Include source files outside Root Directory** | Enabled (required for pnpm workspace packages) |
-| **Build Command** | `pnpm build` (default from `apps/web/vercel.json`) |
-| **Output Directory** | `dist` |
-| **Install Command** | `cd ../.. && pnpm install` |
+| **Root Directory** | *(empty — repo root)* |
+| **Framework Preset** | Other |
+| **Build Command** | `npm run build -w @wagerly/web` |
+| **Output Directory** | `apps/web/dist` |
+| **Install Command** | `npm ci` |
 
-### Environment variables (Vercel → Settings → Environment Variables)
+### Environment variables
 
 Add for **Production**, **Preview**, and **Development**:
 
@@ -86,10 +98,6 @@ In **Supabase → Authentication → URL Configuration**, add your Vercel URL:
 
 Also run all SQL migrations in `supabase/migrations/` if you have not already.
 
-### Alternative: deploy from repo root
-
-If Root Directory is `.` (repo root), the root [`vercel.json`](vercel.json) is used instead — no Vite preset needed.
-
 ## How data flows
 
 ```
@@ -106,9 +114,9 @@ New users get a `public.users` row and play/real wallets automatically via DB tr
 
 | Command | Description |
 |---------|-------------|
-| `pnpm --filter @wagerly/web dev` | Web dev server |
-| `pnpm --filter @wagerly/mobile dev` | Expo (optional) |
-| `pnpm build` | Production build |
+| `npm run dev -w @wagerly/web` | Web dev server |
+| `npm run dev -w @wagerly/mobile` | Expo (optional) |
+| `npm run build` | Production build |
 
 ## Phase 2
 

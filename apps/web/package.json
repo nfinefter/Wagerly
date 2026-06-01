@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.50.0",
-    "@wagerly/shared": "workspace:*",
-    "@wagerly/supabase": "workspace:*",
+    "@wagerly/shared": "*",
+    "@wagerly/supabase": "*",
     "clsx": "^2.1.1",
     "lucide-react": "^0.513.0",
     "react": "^19.1.0",
@@ -26,7 +26,7 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^4.5.0",
-    "@wagerly/config": "workspace:*",
+    "@wagerly/config": "*",
     "tailwindcss": "^4.1.8",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
