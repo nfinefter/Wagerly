@@ -53,35 +53,31 @@ Open [http://localhost:3000](http://localhost:3000). Vite loads `.env` from the 
 
 ## Deploy to Vercel
 
-This is a **Vite + React SPA** in an npm workspaces monorepo. Either Root Directory option works:
+This is a **Vite + React SPA** in an npm workspaces monorepo. Set **Root Directory** to `apps/web` when importing — Vercel pre-fills build settings from [`vercel.json`](vercel.json) at the repo root.
 
-| Root Directory | Config file | Output Directory |
-|----------------|-------------|------------------|
-| *(empty — repo root)* | [`vercel.json`](vercel.json) | `apps/web/dist` |
-| `apps/web` | [`apps/web/vercel.json`](apps/web/vercel.json) | `dist` |
+| Setting | Value |
+|---------|--------|
+| **Root Directory** | `apps/web` |
+| **Framework Preset** | **Other** |
+| **Install Command** | `npm ci` |
+| **Build Command** | `npm run build` |
+| **Output Directory** | `dist` |
 
-Leave **Build Command**, **Output Directory**, and **Install Command** empty in the Vercel dashboard so `vercel.json` controls them.
+These match both [`vercel.json`](vercel.json) and [`apps/web/vercel.json`](apps/web/vercel.json). If Vercel locks in wrong values (e.g. `apps/web/dist` as output), update them to the table above — output must be `dist`, not `apps/web/dist`, when Root Directory is `apps/web`.
+
+Vercel runs `npm ci` from the monorepo root so workspace packages (`@wagerly/shared`, etc.) install correctly.
 
 ### New project
 
 On the Vercel "New Project" screen:
 
-1. **Root Directory** — leave blank (repo root) **or** set to `apps/web`. Both are supported.
-2. **Framework Preset** — choose **Other**. Do not pick Turborepo or Vite.
-3. **Environment Variables** — expand and add before deploying:
+1. **Root Directory** — set to `apps/web`.
+2. **Framework Preset** — choose **Other**.
+3. Confirm build settings match the table above (fix any auto-filled wrong paths).
+4. **Environment Variables** — add before deploying:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
-4. Click **Deploy**.
-
-### Vercel project settings (after creation)
-
-| Setting | Value |
-|---------|--------|
-| **Root Directory** | *(empty)* or `apps/web` |
-| **Framework Preset** | **Other** (not Turborepo, not Vite) |
-| **Build Command** | *(empty — use vercel.json)* |
-| **Output Directory** | *(empty — use vercel.json)* |
-| **Install Command** | *(empty — use vercel.json)* |
+5. Click **Deploy**.
 
 ### Environment variables
 
