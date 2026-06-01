@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
+    "build:web": "pnpm --filter @wagerly/web build",
     "lint": "turbo lint",
     "db:push": "echo 'Run supabase/migrations/20250601000000_init.sql in Supabase SQL Editor'"
   },

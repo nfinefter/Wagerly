@@ -51,6 +51,45 @@ pnpm --filter @wagerly/web dev
 
 Open [http://localhost:3000](http://localhost:3000). Vite loads `.env` from the repo root automatically.
 
+## Deploy to Vercel
+
+This is a **Vite + React SPA** (not Next.js). Use the Vite preset with the app rooted at `apps/web`.
+
+### Vercel project settings
+
+| Setting | Value |
+|---------|--------|
+| **Framework Preset** | Vite |
+| **Root Directory** | `apps/web` |
+| **Include source files outside Root Directory** | Enabled (required for pnpm workspace packages) |
+| **Build Command** | `pnpm build` (default from `apps/web/vercel.json`) |
+| **Output Directory** | `dist` |
+| **Install Command** | `cd ../.. && pnpm install` |
+
+### Environment variables (Vercel → Settings → Environment Variables)
+
+Add for **Production**, **Preview**, and **Development**:
+
+| Name | Value |
+|------|--------|
+| `VITE_SUPABASE_URL` | Your Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | Your Supabase anon / publishable key |
+
+Redeploy after adding env vars — Vite inlines them at build time.
+
+### Supabase auth redirects
+
+In **Supabase → Authentication → URL Configuration**, add your Vercel URL:
+
+- Site URL: `https://your-app.vercel.app`
+- Redirect URLs: `https://your-app.vercel.app/auth/callback`
+
+Also run all SQL migrations in `supabase/migrations/` if you have not already.
+
+### Alternative: deploy from repo root
+
+If Root Directory is `.` (repo root), the root [`vercel.json`](vercel.json) is used instead — no Vite preset needed.
+
 ## How data flows
 
 ```
