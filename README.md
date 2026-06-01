@@ -74,8 +74,8 @@ If a deploy is stuck on "Deploying…", cancel it, fix Root Directory to blank, 
 |---------|--------|
 | **Root Directory** | *(empty — repo root)* |
 | **Framework Preset** | **Other** (not Turborepo, not Vite) |
-| **Build Command** | `npm run build -w @wagerly/web` |
-| **Output Directory** | `apps/web/dist` |
+| **Build Command** | `npm run vercel-build` |
+| **Output Directory** | `dist` |
 | **Install Command** | `npm ci` |
 
 ### Environment variables
