@@ -60,7 +60,7 @@ This is a **Vite + React SPA** in an npm workspaces monorepo. Deploy from the **
 On the Vercel "New Project" screen:
 
 1. **Root Directory** — click **Edit**, then **clear it** (leave blank / repo root). Do **not** use `apps/web`.
-2. **Framework Preset** — choose **Other** (not Vite). The root [`vercel.json`](vercel.json) defines the build.
+2. **Framework Preset** — choose **Other**. Do not pick Turborepo or Vite (Vercel auto-detects `turbo.json` — it has been removed).
 3. **Environment Variables** — expand and add before deploying:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
@@ -73,7 +73,7 @@ If a deploy is stuck on "Deploying…", cancel it, fix Root Directory to blank, 
 | Setting | Value |
 |---------|--------|
 | **Root Directory** | *(empty — repo root)* |
-| **Framework Preset** | Other |
+| **Framework Preset** | **Other** (not Turborepo, not Vite) |
 | **Build Command** | `npm run build -w @wagerly/web` |
 | **Output Directory** | `apps/web/dist` |
 | **Install Command** | `npm ci` |

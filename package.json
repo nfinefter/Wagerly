@@ -6,17 +6,17 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo dev",
+    "dev": "npm run dev -w @wagerly/web",
     "dev:web": "npm run dev -w @wagerly/web",
-    "build": "turbo build",
+    "dev:mobile": "npm run dev -w @wagerly/mobile",
+    "build": "npm run build -w @wagerly/web",
     "build:web": "npm run build -w @wagerly/web",
     "vercel-build": "npm run build -w @wagerly/web",
-    "lint": "turbo lint",
-    "db:push": "echo 'Run supabase/migrations/20250601000000_init.sql in Supabase SQL Editor'"
+    "lint": "npm run lint -w @wagerly/web",
+    "db:push": "echo 'Run supabase/migrations in Supabase SQL Editor'"
   },
   "devDependencies": {
     "prettier": "^3.5.3",
-    "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
   "engines": {
