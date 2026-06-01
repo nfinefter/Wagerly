@@ -53,30 +53,35 @@ Open [http://localhost:3000](http://localhost:3000). Vite loads `.env` from the 
 
 ## Deploy to Vercel
 
-This is a **Vite + React SPA** in an npm workspaces monorepo. Deploy from the **repo root**, not `apps/web`.
+This is a **Vite + React SPA** in an npm workspaces monorepo. Either Root Directory option works:
 
-### New project (important)
+| Root Directory | Config file | Output Directory |
+|----------------|-------------|------------------|
+| *(empty — repo root)* | [`vercel.json`](vercel.json) | `apps/web/dist` |
+| `apps/web` | [`apps/web/vercel.json`](apps/web/vercel.json) | `dist` |
+
+Leave **Build Command**, **Output Directory**, and **Install Command** empty in the Vercel dashboard so `vercel.json` controls them.
+
+### New project
 
 On the Vercel "New Project" screen:
 
-1. **Root Directory** — click **Edit**, then **clear it** (leave blank / repo root). Do **not** use `apps/web`.
-2. **Framework Preset** — choose **Other**. Do not pick Turborepo or Vite (Vercel auto-detects `turbo.json` — it has been removed).
+1. **Root Directory** — leave blank (repo root) **or** set to `apps/web`. Both are supported.
+2. **Framework Preset** — choose **Other**. Do not pick Turborepo or Vite.
 3. **Environment Variables** — expand and add before deploying:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
 4. Click **Deploy**.
 
-If a deploy is stuck on "Deploying…", cancel it, fix Root Directory to blank, and redeploy.
-
 ### Vercel project settings (after creation)
 
 | Setting | Value |
 |---------|--------|
-| **Root Directory** | *(empty — repo root)* |
+| **Root Directory** | *(empty)* or `apps/web` |
 | **Framework Preset** | **Other** (not Turborepo, not Vite) |
-| **Build Command** | `npm run vercel-build` |
-| **Output Directory** | `dist` |
-| **Install Command** | `npm ci` |
+| **Build Command** | *(empty — use vercel.json)* |
+| **Output Directory** | *(empty — use vercel.json)* |
+| **Install Command** | *(empty — use vercel.json)* |
 
 ### Environment variables
 
