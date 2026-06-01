@@ -1,0 +1,2 @@
+export const PLAY_MONEY_STARTING_BALANCE = 10_000;
+export const INVITE_CODE_LENGTH = 8;

@@ -1,0 +1,39 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build
+.next
+dist
+out
+.turbo
+expo-env.d.ts
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Prisma
+packages/database/prisma/*.db
+
+# IDE / OS
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Expo
+apps/mobile/.expo
+apps/mobile/ios
+apps/mobile/android
+
+# Debug
+npm-debug.log*
+*.log
+
+# TypeScript
+*.tsbuildinfo
+
+# Vercel
+.vercel
